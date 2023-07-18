@@ -1,6 +1,7 @@
-# benchmarking together
-Code to benchmark Together APIs and demostrate how they work
-Reports the end to end time for API access and the token generation time reported by together
+# Benchmarking Together APIs
+Together is a service that enables developers to build applications with access to APIs for open source machine learning models.
+This code attempts to benchmark Together APIs and demostrates how they work.
+Reports the end to end time for API access and the token generation time reported by together.
 
 # Usage:
 python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <API_key>
@@ -11,7 +12,7 @@ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <API_key>
 3. Retrieve your API key from the settings portion of your profile.
 4. Supply the model and the API key in the example above.
 
-#Example results
+# Example results
 Here are a few example results:
 
 $ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <api key>
