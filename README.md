@@ -29,3 +29,7 @@ python3 benchmark.py togethercomputer/falcon-40b <api key>
 Performance results for model togethercomputer/falcon-40b
 API end to end time in seconds 0.7129
 Together reported compute time in seconds 0.1936
+
+# Repository of results
+A detailed spreadsheet of results is available here: https://www.buymeacoffee.com/hiamitabha
+
