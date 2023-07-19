@@ -1,6 +1,6 @@
-# Benchmarking Together APIs
-Together is a service that enables developers to build applications with access to APIs for open source machine learning models.
-This code attempts to benchmark Together APIs and demostrates how they work.
+# Benchmarking LLM Inference APIs provide by Cloud Services
+Cloud services such as Together enables developer to build applications with access to APIs for open source machine learning models.
+This code attempts to benchmark LLM Inference APIs and demostrates how they work.
 Reports the end to end time for API access and the token generation time reported by together.
 
 # Usage:
