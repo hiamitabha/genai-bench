@@ -1,6 +1,7 @@
-# benchmarking together
-Code to benchmark Together APIs and demostrate how they work
-Reports the end to end time for API access and the token generation time reported by together
+# Benchmarking LLM Inference APIs provide by Cloud Services
+Cloud services such as Together enables developer to build applications with access to APIs for open source machine learning models.
+This code attempts to benchmark LLM Inference APIs and demostrates how they work.
+Reports the end to end time for API access and the token generation time reported by together.
 
 # Usage:
 python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <API_key>
@@ -11,7 +12,7 @@ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <API_key>
 3. Retrieve your API key from the settings portion of your profile.
 4. Supply the model and the API key in the example above.
 
-#Example results
+# Example results
 Here are a few example results:
 
 $ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <api key>
@@ -28,3 +29,7 @@ python3 benchmark.py togethercomputer/falcon-40b <api key>
 Performance results for model togethercomputer/falcon-40b
 API end to end time in seconds 0.7129
 Together reported compute time in seconds 0.1936
+
+# Repository of results
+A detailed spreadsheet of results is available here: http://llms.learnwitharobot.com
+
