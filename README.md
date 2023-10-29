@@ -15,20 +15,19 @@ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <API_key>
 # Example results
 Here are a few example results:
 
-$ python3 benchmark.py togethercomputer/RedPajama-INCITE-7B-Instruct <api key>
-Performance results for model togethercomputer/RedPajama-INCITE-7B-Instruct
-API end to end time in seconds 0.3629
-Together reported compute time in seconds 0.0400
-
-$ python3 benchmark.py togethercomputer/RedPajama-INCITE-Instruct-3B-v1 <api key>
-Performance results for model togethercomputer/RedPajama-INCITE-Instruct-3B-v1
-API end to end time in seconds 0.3474
-Together reported compute time in seconds 0.0372
-
-python3 benchmark.py togethercomputer/falcon-40b <api key> 
-Performance results for model togethercomputer/falcon-40b
-API end to end time in seconds 0.7129
-Together reported compute time in seconds 0.1936
+<code>
+python3 benchmark.py togethercomputer/llama-2-7b-chat e870071a84b339d1bf3e1d6f5e5338601afb9db0633c38eda1244df9aba560b5
+Performance results for model togethercomputer/llama-2-7b-chat
+Iteration #, Date/Time, API response time(s)
+0,10/28/2023 23:11:08,0.44153342099980364
+1,10/28/2023 23:16:08,0.4318333090000124
+2,10/28/2023 23:21:09,0.4267277169992667
+3,10/28/2023 23:26:09,0.40943820099982986
+4,10/28/2023 23:31:10,1.295396979000543
+5,10/28/2023 23:36:11,0.42362863200014544
+6,10/28/2023 23:41:12,0.37723448099950474
+7,10/28/2023 23:46:12,0.4338321889999861
+<code>
 
 # Repository of results
 A detailed spreadsheet of results is available here: http://llms.learnwitharobot.com
