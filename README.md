@@ -1,5 +1,5 @@
 # Benchmarking LLM Inference APIs provide by Cloud Services
-Cloud services such as Together enables developer to build applications with access to APIs for open source machine learning models.
+Cloud services such as Togethe, Anyscale, and others enable developers to build applications with access to APIs for open source machine learning models.
 This code attempts to benchmark LLM Inference APIs and demostrates how they work.
 Reports the end to end time for API access and the token generation time reported by together.
 
