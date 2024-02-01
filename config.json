@@ -1,0 +1,12 @@
+[
+    {
+        "vendor": "togetherai",
+        "model": "togethercomputer/llama-2-7b-chat",
+        "api_key": "<Put Together's API Key here>"
+    },
+    {
+        "vendor": "anyscale",
+        "model": "meta-llama/Llama-2-7b-chat-hf",
+        "api_key": "<Put Anyscale's API Key here>"
+    }
+]
