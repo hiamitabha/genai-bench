@@ -1,16 +1,13 @@
+from providers.provider import Provider
+
 _TOGETHER_ENDPOINT = "https://api.together.xyz/inference"
 
-class Together:
+class Together(Provider):
     def __init__(self, model, api_key, prompt, top_p=1, top_k=40, temperature=0.1,
                  max_tokens=1, repetition_penalty=1):
-        self.model = model
-        self.api_key = api_key
-        self.prompt = prompt
-        self.top_p = top_p
-        self.top_k = top_k
-        self.temperature = temperature
-        self.max_tokens = max_tokens
-        self.repetition_penalty = repetition_penalty
+        Provider.__init__(self, model, api_key, prompt,
+                           top_p, top_k, temperature,
+                           max_tokens, repetition_penalty)
 
     def get_payload(self):
         payload = { 
@@ -35,8 +32,7 @@ class Together:
     def get_endpoint():
         return _TOGETHER_ENDPOINT
 
-    @staticmethod
-    def process_result(result): 
+    def process_result(self, result):
         if result.get('status') == 'finished':
             compute_time = result['output'].get('raw_compute_time')
             return (True, compute_time)

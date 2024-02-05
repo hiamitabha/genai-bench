@@ -1,23 +1,20 @@
+from providers.provider import Provider
+
 _ANYSCALE_ENDPOINT = "https://api.endpoints.anyscale.com/v1/chat/completions"
-class Anyscale:
+class Anyscale(Provider):
 
     def __init__(self, model, api_key, prompt, top_p=1, top_k=40, temperature=0.1,
                  max_tokens=2, repetition_penalty=1):
-        self.model = model
-        self.api_key = api_key
-        self.prompt = prompt
-        self.top_p = top_p
-        self.top_k = top_k
-        self.temperature = temperature
-        self.max_tokens = max_tokens
-        self.repetition_penalty = repetition_penalty
+        Provider.__init__(self, model, api_key, prompt,
+                           top_p, top_k, temperature,
+                           max_tokens, repetition_penalty)
 
     def get_payload(self):
         payload = {
             "model": self.model,
             "messages": [{"role": "system", "content": "You need to answer questions in a single word."}, 
                {"role": "user", "content": self.prompt}],
-            "temperature": 0.7,
+            "temperature": self.temperature,
             "max_tokens": self.max_tokens 
         }
         return payload
@@ -26,7 +23,6 @@ class Anyscale:
         header = headers={"Authorization": f"Bearer {self.api_key}"}
         return header
 
-    
     @staticmethod
     def get_endpoint():
         return _ANYSCALE_ENDPOINT
