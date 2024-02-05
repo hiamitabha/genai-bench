@@ -8,6 +8,7 @@ a fair apples-to-apples analysis of all the endpoints. The TTFT reported can be 
 
 # Usage:
 First add all the required vendors, models, and API Keys in the configuration file (config.json). The configuration file should look like:
+<code>
 [
     {
         "vendor": "togetherai",
@@ -20,6 +21,7 @@ First add all the required vendors, models, and API Keys in the configuration fi
         "api_key": "<Insert API Ley here>"
     }
 ]
+</code>
 You can replace the model with your favorite one. You can also compare multiple models from the same provider.
 
 Then Run:
@@ -36,7 +38,6 @@ Here we take the example of Together AI. Other vendors have similar steps
 # Example results
 The benchamrk reports the results per iteration in CSV format. At the end of all the iterations, the benchmark plots a comparison in the provided results file.
 
-=======
 Here are is an example result:
 
 <code>
