@@ -9,6 +9,8 @@ from datetime import datetime
 from providers.together_ai import Together
 from providers.anyscale import Anyscale
 
+from utils.plot import plot_time_series
+
 def time_request(llm_instance):
     """Issue a sample inference query using the provided llm_instance
        Optionally returns the compute time reported by the llm_instance
@@ -43,14 +45,17 @@ def test_api(llm_instance, model_name, vendor, iterations=10, sleep_in_seconds=3
         dt_string = now.strftime("%m/%d/%Y %H:%M:%S")
         (api_time, compute_time) = time_request(llm_instance)
         print (f"{i},{model_name},{vendor},{dt_string},{api_time}")
-        time.sleep(sleep_in_seconds)
+        llm_instance.append_result(now, api_time)
+        if i < iterations:
+            time.sleep(sleep_in_seconds)
 
-def run_threads(config_file, iterations, sleep):
+def run_threads(config_file, input_text, iterations, sleep):
     """
         Open the config file and run requested APIs in parallel
     """
     num_models = 0
     thread_pool = []
+    model_instances = []
     with open(config_file) as json_file:
         model_list = json.load(json_file)
         for model_det in model_list:
@@ -59,11 +64,13 @@ def run_threads(config_file, iterations, sleep):
            api_key = model_det.get("api_key")
            num_models += 1
            if vendor == "togetherai":
-               model_instance = Together(model, api_key, "What is the capital of France?")
+               model_instance = Together(model, api_key, input_text)
+               model_instances.append((vendor, model_instance))
                thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
                thread_pool.append(thread)
            elif vendor == "anyscale":
-               model_instance = Anyscale(model, api_key, "What is the capital of France?")
+               model_instance = Anyscale(model, api_key, input_text)
+               model_instances.append((vendor, model_instance))
                thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
                thread_pool.append(thread)
 
@@ -75,11 +82,28 @@ def run_threads(config_file, iterations, sleep):
     for thread in thread_pool:
         thread.join()
 
+    data = {}
+    model_num = 0
+    vendors = []
+    series_colors = ["blue", "orange"]
+    for (vendor, model_instance) in model_instances:
+        result = model_instance.get_result()
+        transpose = list(zip(*result))
+        if (model_num == 0):
+            data['Time'] = transpose[0]
+            data[vendor] = transpose[1]
+        else:
+            data[vendor] = transpose[1]
+        vendors.append(vendor)
+        model_num +=1
+    print(data)
+    plot_time_series(data, 'Time', vendors, series_colors, "API Response Time (TTFT) for cloud based LLM services", "Date/Timestamp", "Response Time(s)")
+
 def parse_args():
    parser = argparse.ArgumentParser("Benchmark multiple LLMs simultaneously")
-   parser.add_argument("-i", "--iterations", type=int, default=10,
+   parser.add_argument("-i", "--iterations", type=int, default=200,
                        help="Number of iterations to run for each LLM model")
-   parser.add_argument("-s", "--sleep", type=int, default=30,
+   parser.add_argument("-s", "--sleep", type=int, default=300,
                        help="Time to sleep between iteratione")
    parser.add_argument("-c", "--config", default="config.json",
                        help="Configuration file which lists LLM API Keys")
@@ -88,4 +112,5 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    run_threads(args.config, args.iterations, args.sleep)
+    input_text = "What is the capital of France?"
+    run_threads(args.config, input_text, args.iterations, args.sleep)
