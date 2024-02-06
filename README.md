@@ -70,11 +70,11 @@ Iteration #, Date/Time, Model Name, Vendor, API response time(s)
   
 The above is the result of one iteration.
 
-The following plot compares the Llama2-7B-chat model provided by Together AI and Anyscale. Data was collected on 2/5/2024 between 10AM and 12PM.
+The following plot compares the Llama2-7B-chat model provided by Together AI and Anyscale. Data was collected on 2/5/2024 between 10AM PST and 12PM PST.
 
 ![Comparison between Together AI and Anyscale](https://github.com/hiamitabha/genai-bench/blob/main/results/result-together_vs_anyscale_llama27b.png?raw=true)
 
-The following plot compares the Llama2-7B-chat model and Llama2-70B-chat model provided by Together AI. Data was collected on 2/5/2024 between 6PM and 8PM.
+The following plot compares the Llama2-7B-chat model and Llama2-70B-chat model provided by Together AI. Data was collected on 2/5/2024 between 6PM PST and 8PM PST.
 
 ![Comparison between Llama2-7B-chat vs Llama2-70B-chat at Together AI](https://raw.githubusercontent.com/hiamitabha/genai-bench/main/results/result-together_llama2_7b_vs_70b.png)
 
