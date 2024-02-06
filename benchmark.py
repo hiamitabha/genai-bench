@@ -65,12 +65,12 @@ def run_threads(config_file, input_text, iterations, sleep):
            num_models += 1
            if vendor == "togetherai":
                model_instance = Together(model, api_key, input_text)
-               model_instances.append((vendor, model_instance))
+               model_instances.append((vendor+'_'+model, model_instance))
                thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
                thread_pool.append(thread)
            elif vendor == "anyscale":
                model_instance = Anyscale(model, api_key, input_text)
-               model_instances.append((vendor, model_instance))
+               model_instances.append((vendor+'_'+model, model_instance))
                thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
                thread_pool.append(thread)
 
@@ -84,8 +84,8 @@ def run_threads(config_file, input_text, iterations, sleep):
 
     data = {}
     model_num = 0
-    vendors = []
     series_colors = ["blue", "orange"]
+    vendors = []
     for (vendor, model_instance) in model_instances:
         result = model_instance.get_result()
         transpose = list(zip(*result))
@@ -97,20 +97,24 @@ def run_threads(config_file, input_text, iterations, sleep):
         vendors.append(vendor)
         model_num +=1
     print(data)
-    plot_time_series(data, 'Time', vendors, series_colors, "API Response Time (TTFT) for cloud based LLM services", "Date/Timestamp", "Response Time(s)")
+    plot_time_series(data, 'Time', vendors, series_colors, "API Response Time (TTFT) for cloud based LLM services", "Date/Timestamp", "Response Time (TTFT) (s)")
 
 def parse_args():
-   parser = argparse.ArgumentParser("Benchmark multiple LLMs simultaneously")
-   parser.add_argument("-i", "--iterations", type=int, default=200,
-                       help="Number of iterations to run for each LLM model")
-   parser.add_argument("-s", "--sleep", type=int, default=300,
-                       help="Time to sleep between iteratione")
-   parser.add_argument("-c", "--config", default="config.json",
-                       help="Configuration file which lists LLM API Keys")
-   args = parser.parse_args()
-   return args
+    parser = argparse.ArgumentParser("Benchmark multiple LLMs simultaneously")
+    parser.add_argument("-i", "--iterations", type=int, default=200,
+                        help="Number of iterations to run for each LLM model")
+    parser.add_argument("-s", "--sleep", type=int, default=300,
+                        help="Time to sleep between iteratione")
+    parser.add_argument("-c", "--config", default="config.json",
+                        help="Configuration file which lists LLM API Keys")
+    parser.add_argument("-f", "--file", default="data/test.txt",
+                        help="File containing the text for the input tokens")
+    args = parser.parse_args()
+    return args
 
 if __name__ == "__main__":
     args = parse_args()
-    input_text = "What is the capital of France?"
-    run_threads(args.config, input_text, args.iterations, args.sleep)
+    with open(args.file, "r") as fp:
+        lines = fp.readlines()
+        input_text = ''.join(lines)
+        run_threads(args.config, input_text, args.iterations, args.sleep)
