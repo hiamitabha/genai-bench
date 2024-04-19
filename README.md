@@ -78,6 +78,10 @@ The following plot compares the Llama2-7B-chat model and Llama2-70B-chat model p
 
 ![Comparison between Llama2-7B-chat vs Llama2-70B-chat at Together AI](https://raw.githubusercontent.com/hiamitabha/genai-bench/main/results/result-together_llama2_7b_vs_70b.png)
 
+The following plot compares the Llama2-7B-chat model and the Llama3-8B-chat models provided by Together AI. The comparison was generated on the day Llama3 was made available by Together AI.
+
+![Comparison between Llama2 and Llama3](https://raw.githubusercontent.com/hiamitabha/genai-bench/main/results/result-together_llama2_7b_vs_llama3_8b.png)
+
 # Repository of results
 A detailed spreadsheet of results is available here: http://llms.learnwitharobot.com
 
