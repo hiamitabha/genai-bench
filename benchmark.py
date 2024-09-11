@@ -7,6 +7,7 @@ import json
 from datetime import datetime
 
 from providers.together_ai import Together
+from providers.sambanova_ai import Sambanova
 from providers.anyscale import Anyscale
 
 from utils.plot import plot_time_series
@@ -20,11 +21,11 @@ def time_request(llm_instance):
     """
     try:
         start = time.perf_counter()
-        res = requests.post(llm_instance.get_endpoint(), json=llm_instance.get_payload(), headers=llm_instance.get_header())
+        request_json = llm_instance.get_payload()
+        res = requests.post(llm_instance.get_endpoint(), json=request_json, headers=llm_instance.get_header())
         end = time.perf_counter()
-        result = res.json()
         api_time = end - start
-        is_result_valid, details = llm_instance.process_result(result)
+        is_result_valid, details = llm_instance.process_result(res)
         if (is_result_valid):
             return (api_time, details)
         else:
@@ -70,6 +71,11 @@ def run_threads(config_file, input_text, iterations, sleep):
                thread_pool.append(thread)
            elif vendor == "anyscale":
                model_instance = Anyscale(model, api_key, input_text)
+               model_instances.append((vendor+'_'+model, model_instance))
+               thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
+               thread_pool.append(thread)
+           elif vendor == "sambanovaai":
+               model_instance = Sambanova(model, api_key, input_text)
                model_instances.append((vendor+'_'+model, model_instance))
                thread = threading.Thread(target=test_api, args=(model_instance, model, vendor, iterations, sleep))
                thread_pool.append(thread)
