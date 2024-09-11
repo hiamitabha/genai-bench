@@ -1,9 +1,9 @@
 # GenAI-Bench: Benchmarking Large Language Models (LLMs) Inference APIs provide by Cloud Providers
-Cloud Providers such as Together AI, Anyscale, etc, enable developers to build applications with access to APIs for open source Large Language Models (LLMs).
+Cloud Providers such as Together AI, Fireworks.ai, Lepton.ai, Cerebras, Sambanova, Groq, Anyscale, etc, enable developers to build applications with access to APIs for open source Large Language Models (LLMs).
 GenAI-Bench attempts to benchmark LLM Inference APIs, demostrate how they work, and compare models provided.
 The benchmark reports the end to end time for API response time for one token, which becomes the equivalent of Time To First Token (TTFT).
 
-The distinguishing feature about this benchmark is that it issues requests to all providers/models concurrently, so you get
+Almost all benchmarking results profile different cloud providers at different times of the day. As a result, the comparison is misleading as it discounts the effect of load on the cloud servers. If you need you app to use a cloud service provider at a certan time in the day, the result at a certain time at night or early morning is meaningless for you. The distinguishing feature about this benchmark is that it issues requests to all providers/models concurrently, so you get
 a fair apples-to-apples analysis of all the endpoints. The TTFT reported can be easiily compared bewteen the different providers/models.
 
 # Usage:
@@ -82,6 +82,5 @@ The following plot compares the Llama2-7B-chat model and the Llama3-8B-chat mode
 
 ![Comparison between Llama2 and Llama3](https://raw.githubusercontent.com/hiamitabha/genai-bench/main/results/result-together_llama2_7b_vs_llama3_8b.png)
 
-# Repository of results
-A detailed spreadsheet of results is available here: http://llms.learnwitharobot.com
-
+The following plot compared the Llama3-405B model offered by Together AI and Sambanova AI. This comparison was generated on the day Llama3-405B was made available for developer access.
+![Comparison between Together AI and Sambanova AI for Llama3-405B](https://raw.githubusercontent.com/hiamitabha/genai-bench/main/results/result-together_vs_sambanova_llama3_405b.png)
